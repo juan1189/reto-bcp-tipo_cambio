@@ -2,9 +2,10 @@ package com.bcp.reto.service.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,8 @@ import io.reactivex.Single;
 
 @Service
 public class TipoCambioServiceImpl implements TipoCambioService{
+	
+	private static final Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	
 	private final Integer numeroDecimales = 4;
 	 
@@ -82,8 +85,10 @@ public class TipoCambioServiceImpl implements TipoCambioService{
 				
 			} catch (Exception ex) {
 				if (ex instanceof ServiceException) {
+					logger.error(ex);
 					source.onError(ex);
               } else {
+            	  logger.error(ex);
             	  source.onError(new ServiceException(ErrorCode.E000, ex.getMessage()));
               }
 			}
