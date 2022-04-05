@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +23,9 @@ import io.reactivex.schedulers.Schedulers;
 @RestController
 @RequestMapping(value = "/api/tipoCambio")
 public class TipoCambioRestController {
-
+	
+	private static final Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+	
 	private TipoCambioService tipoCambioService;
 	
 	@Autowired
@@ -31,8 +35,9 @@ public class TipoCambioRestController {
 	
 	@PostMapping
     public Single<ResponseEntity<TipoCambioResponseDto>> cambioMoneda(
-            @RequestBody TipoCambioRequestDto tipoCambioRequestDto
-            , HttpSession session) {
+            @RequestBody TipoCambioRequestDto tipoCambioRequestDto, HttpSession session) {
+		
+		logger.info("Calculando tipo de Cambio");
 				setAuditoria(tipoCambioRequestDto,session);
         return tipoCambioService.cambioMoneda(tipoCambioRequestDto).subscribeOn(Schedulers.io())
                 .map(ResponseEntity::ok);
