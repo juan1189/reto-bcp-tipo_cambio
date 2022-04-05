@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.bcp.reto.enums.EnumRol;
 import com.bcp.reto.jwtl.JwtRequestFilter;
 
 
@@ -48,11 +49,21 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().cors().and()
-				.authorizeRequests().antMatchers("/api/reto/authenticate").permitAll().
-						anyRequest().authenticated().and().
-						exceptionHandling().and().sessionManagement()
+		httpSecurity
+				.csrf().disable().cors()
+				.and()
+				.authorizeRequests()
+				.antMatchers("/api/reto/authenticate")
+				.permitAll()
+//				.hasRole("ADMIN")
+//				.anyRequest()
+//				.authenticated()
+				.and()
+				.exceptionHandling()
+				.and()
+				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}

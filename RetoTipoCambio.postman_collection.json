@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "f09da69f-afc9-4af5-b773-41d72e48434a",
+		"name": "RetoTipoCambio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Moneda",
+			"item": [
+				{
+					"name": "GuardarMoneda",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\": \"EUR\",\r\n    \"nombre\": \"Euro\",\r\n    \"monedaNacional\": 0,\r\n    \"valorCambio\": \"4.00376\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ip_service}}/api/moneda",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"moneda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarMoneda",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ip_service}}/api/moneda",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"moneda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarMoneda",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\": \"GNF2\",\r\n    \"nombre\": \"GNF2\",\r\n    \"monedaNacional\": 0,\r\n    \"valorCambio\": \"156.00376\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ip_service}}/api/moneda/12",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"moneda",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarMoneda",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ip_service}}/api/moneda/4",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"moneda",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TipoCambio",
+			"item": [
+				{
+					"name": "ListarTipoCambio",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ip_service}}/api/moneda",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"moneda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CalcularTipoCambio",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoMonedaOrigen\":\"USD\",\r\n    \"codigoMonedaDestino\":\"PEN\",\r\n    \"monto\":\"250\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ip_service}}/api/tipoCambio",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"tipoCambio"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "ListarUsuario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"usuario_nombre\");\r",
+									"var clave = pm.environment.get(\"usuario_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ip_service}}/api/usuario",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GuardarUsuario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var url = pm.environment.get(\"ip_service\");\r",
+									"var usuario = pm.environment.get(\"admin_nombre\");\r",
+									"var clave = pm.environment.get(\"admin_clave\");\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"   url: url + \"/api/reto/authenticate\",\r",
+									"   method: 'POST',\r",
+									"   header: {\r",
+									"       'content-type': 'application/json',\r",
+									"       'accept': 'application/json',\r",
+									"   },\r",
+									"   body: {\r",
+									"       mode: 'raw',\r",
+									"       raw: JSON.stringify(\r",
+									"                           {\r",
+									"                            \"username\": usuario,\r",
+									"                            \"password\": clave\r",
+									"                           }\r",
+									"           )\r",
+									"   }\r",
+									"}, function (err, res) {\r",
+									"    var token = res.json()['jwt'];    \r",
+									"    pm.environment.set(\"token\", token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"user_ejemplo\",\r\n    \"clave\": \"user_ejemplo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ip_service}}/api/usuario",
+							"host": [
+								"{{ip_service}}"
+							],
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SeguridadToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"bcp_usuario\",\"password\":\"bcp_usuario_clave\"}"
+				},
+				"url": {
+					"raw": "{{ip_service}}/api/reto/authenticate",
+					"host": [
+						"{{ip_service}}"
+					],
+					"path": [
+						"api",
+						"reto",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
