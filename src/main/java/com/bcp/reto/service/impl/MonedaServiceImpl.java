@@ -111,7 +111,8 @@ public class MonedaServiceImpl implements MonedaService {
 	                            singleSubscriber.onSuccess(responseDto);
 
 	                        }, () -> {
-	                            throw new ServiceException(ErrorCode.E001);
+	                            ;
+	                         singleSubscriber.onError(new ServiceException(ErrorCode.E001));
 	                        });
 	            } catch (Exception ex) {
 	            	 if (ex instanceof ServiceException) {
