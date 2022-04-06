@@ -26,7 +26,7 @@ public class TipoCambioRestController {
 	
 	private static final Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	
-	private TipoCambioService tipoCambioService;
+	private final TipoCambioService tipoCambioService;
 	
 	@Autowired
 	public TipoCambioRestController(TipoCambioService tipoCambioService) {

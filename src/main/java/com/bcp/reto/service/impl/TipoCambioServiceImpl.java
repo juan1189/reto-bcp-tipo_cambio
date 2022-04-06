@@ -29,9 +29,9 @@ public class TipoCambioServiceImpl implements TipoCambioService{
 	
 	private final Integer numeroDecimales = 4;
 	 
-	private MonedaRepository monedaRepository;
-	private TipoCambioResponseTransformToDto tipoCambioResponseTransformToDto;
-	private TipoCambioRepository tipoCambioRepository;
+	private final MonedaRepository monedaRepository;
+	private final TipoCambioResponseTransformToDto tipoCambioResponseTransformToDto;
+	private final TipoCambioRepository tipoCambioRepository;
 	
 	@Autowired
 	public TipoCambioServiceImpl(MonedaRepository monedaRepository

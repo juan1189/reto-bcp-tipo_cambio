@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bcp.reto.dto.MonedaRequestDto;
 import com.bcp.reto.dto.MonedaResponseDto;
@@ -24,9 +25,9 @@ import io.reactivex.Single;
 @Service
 public class MonedaServiceImpl implements MonedaService {
 
-	private MonedaRepository monedaRepository;
-	private MonedaTransformToDto monedaTransformToDto;
-	private MonedaTransformToEntity monedaTransformToEntity;
+	private final MonedaRepository monedaRepository;
+	private final MonedaTransformToDto monedaTransformToDto;
+	private final MonedaTransformToEntity monedaTransformToEntity;
 	
 	@Autowired
 	public MonedaServiceImpl(MonedaRepository monedaRepository,
@@ -68,6 +69,7 @@ public class MonedaServiceImpl implements MonedaService {
 
 
 	@Override
+	@Transactional
 	public Completable eliminarMoneda(Long id) {
 		 return Completable.create(completableSubscriber -> {
 	            try {
@@ -87,6 +89,7 @@ public class MonedaServiceImpl implements MonedaService {
 
 
 	@Override
+	@Transactional
 	public Single<MonedaResponseDto> actualizar(Long id, MonedaRequestDto monedaRequestDto) {
 		 return Single.create(singleSubscriber -> {
 	            try {
@@ -111,8 +114,7 @@ public class MonedaServiceImpl implements MonedaService {
 	                            singleSubscriber.onSuccess(responseDto);
 
 	                        }, () -> {
-	                            ;
-	                         singleSubscriber.onError(new ServiceException(ErrorCode.E001));
+	                            throw new ServiceException(ErrorCode.E001);
 	                        });
 	            } catch (Exception ex) {
 	            	 if (ex instanceof ServiceException) {
@@ -126,6 +128,7 @@ public class MonedaServiceImpl implements MonedaService {
 
 
 	@Override
+	@Transactional
 	public Single<MonedaResponseDto> guardar(MonedaRequestDto monedaRequestDto) {
 		 return Single.create(singleSubscriber -> {
 	            try {

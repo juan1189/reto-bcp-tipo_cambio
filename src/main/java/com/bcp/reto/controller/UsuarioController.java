@@ -25,9 +25,14 @@ import io.reactivex.schedulers.Schedulers;
 @RequestMapping(value = "/api/usuario")
 public class UsuarioController {
 
-	@Autowired
-	private UsuarioService usuarioService;
 	
+	private final UsuarioService usuarioService;
+	
+	@Autowired
+	public UsuarioController(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
+	}
+
 	@GetMapping
 	public Single<ResponseEntity<List<UsuarioResponseDto>>> listarUsuario() {
 	    return usuarioService.listarUsuario()

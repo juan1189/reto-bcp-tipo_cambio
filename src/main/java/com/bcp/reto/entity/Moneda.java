@@ -1,5 +1,6 @@
 package com.bcp.reto.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Table(name="tbl_moneda")
-public class Moneda extends Auditoria {
+public class Moneda extends Auditoria implements Serializable {
 				
 		@Builder
 	    public Moneda(Date fecha_creacion, String usuario_creacion, Date fecha_actualizacion, String usuario_actualizacion,

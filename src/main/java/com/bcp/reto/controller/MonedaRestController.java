@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 @RequestMapping(value = "/api/moneda")
 public class MonedaRestController {
 	
-	private MonedaService monedaService;
+	private final MonedaService monedaService;
 	
 	@Autowired
 	public MonedaRestController(MonedaService monedaService) {
@@ -70,7 +70,8 @@ public class MonedaRestController {
     public Single<ResponseEntity<MonedaResponseDto>> guardar(
         @RequestBody MonedaRequestDto monedaRequestDto,HttpSession session) {
     			setAuditoria(monedaRequestDto,session);
-        return monedaService.guardar(monedaRequestDto).subscribeOn(Schedulers.io())
+        return monedaService.guardar(monedaRequestDto)
+        		.subscribeOn(Schedulers.io())
                 .map(ResponseEntity::ok);
     }
 	
