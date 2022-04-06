@@ -20,7 +20,7 @@ import lombok.Setter;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TipoCambioResponseDto extends Auditoria implements Serializable {
+public class TipoCambioResponseDto implements Serializable {
 private String codigoMonedaOrigen;
 private String codigoMonedaDestino;
 private BigDecimal monto;

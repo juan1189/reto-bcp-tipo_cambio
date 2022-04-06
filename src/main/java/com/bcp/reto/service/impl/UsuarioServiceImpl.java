@@ -20,14 +20,17 @@ import io.reactivex.Single;
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private UsuarioTransformToDto usuarioTransformToDto;
-	
-	@Autowired
+	private UsuarioRepository usuarioRepository;	
+	private UsuarioTransformToDto usuarioTransformToDto;	
 	private UsuarioTransformToEntity usuarioTransformToEntity;
+	
+	@Autowired
+	public UsuarioServiceImpl(UsuarioRepository usuarioRepository, UsuarioTransformToDto usuarioTransformToDto,
+			UsuarioTransformToEntity usuarioTransformToEntity) {
+		this.usuarioRepository = usuarioRepository;
+		this.usuarioTransformToDto = usuarioTransformToDto;
+		this.usuarioTransformToEntity = usuarioTransformToEntity;
+	}
 	
 	@Override
 	public Single<List<UsuarioResponseDto>> listarUsuario() {

@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.bcp.reto.enums.EnumRol;
 import com.bcp.reto.jwtl.JwtRequestFilter;
 
 
@@ -58,8 +57,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //				.hasRole("ADMIN")
 //				.anyRequest()
 //				.authenticated()
-				.and()
-				.exceptionHandling()
+//				.and()
+//				.exceptionHandling()
 				.and()
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
